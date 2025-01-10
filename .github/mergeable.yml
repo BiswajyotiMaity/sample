@@ -7,9 +7,9 @@ mergeable:
           regex: '.*'
           message: 'PR title must not be empty.'
       - do: description
-        must_include:
-          regex: '.*'
-          message: 'PR description must not be empty.'
+        no_empty:
+          enabled: true
+          message: Description matter and should not be empty. Provide detail with **what** was changed, **why** it was changed, and **how** it was changed.
     pass:
       - do: merge
         method: merge
