@@ -19,3 +19,12 @@ mergeable:
               - The description must not be empty
       - do: labels
         add: 'Non-Compliant'
+    pass:
+      - do: comment
+        payload:
+          body: >
+           <h2>Tiltle seems okay</h2>
+           <h3>Description is also there great !! Ready for Review!</h3>
+           :+1:
+      - do: labels
+        add: 'Ready for Review'
