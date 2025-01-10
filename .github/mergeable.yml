@@ -3,13 +3,29 @@ mergeable:
   - when: pull_request.*, pull_request_review.*, pull_request_review_comment.*
     validate:
       - do: title
-        must_include:
-          regex: '.*'
+        no_empty:
+          enabled: true
           message: 'PR title must not be empty.'
       - do: description
-        must_include:
-          regex: '.*'
-          message: 'PR description must not be empty.'
+        no_empty:
+          enabled: true
+          message: Description matter and should not be empty. Provide detail with **what** was changed, **why** it was changed, and **how** it was changed.
     pass:
-      - do: merge
-        method: merge
+      - do: comment
+        payload:
+          body: >
+           <h2>Tiltle seems okay</h2>
+           <h3>Description is also there great !! Ready for Review!</h3>
+           :+1:
+      - do: labels
+        add: 'Ready for Review'
+        delete: 'Non-Compliant'
+    fail:
+      - do: comment
+        payload:
+          body: >
+            The following problems were found with this issue:
+              - Title must not be empty
+              - The description must not be empty
+      - do: labels
+        add: 'Non-Compliant'
