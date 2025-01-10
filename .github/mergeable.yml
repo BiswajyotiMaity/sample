@@ -19,6 +19,7 @@ mergeable:
            :+1:
       - do: labels
         add: 'Ready for Review'
+        delete: 'Non-Compliant'
     fail:
       - do: comment
         payload:
