@@ -10,15 +10,6 @@ mergeable:
         no_empty:
           enabled: true
           message: Description matter and should not be empty. Provide detail with **what** was changed, **why** it was changed, and **how** it was changed.
-    fail:
-      - do: comment
-        payload:
-          body: >
-            The following problems were found with this issue:
-              - Title must not be empty
-              - The description must not be empty
-      - do: labels
-        add: 'Non-Compliant'
     pass:
       - do: comment
         payload:
@@ -28,3 +19,12 @@ mergeable:
            :+1:
       - do: labels
         add: 'Ready for Review'
+    fail:
+      - do: comment
+        payload:
+          body: >
+            The following problems were found with this issue:
+              - Title must not be empty
+              - The description must not be empty
+      - do: labels
+        add: 'Non-Compliant'
