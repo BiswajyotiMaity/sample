@@ -17,3 +17,5 @@ mergeable:
             The following problems were found with this issue:
               - Title must not be empty
               - The description must not be empty
+      - do: labels
+        add: 'Non-Compliant'
