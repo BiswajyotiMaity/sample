@@ -1,15 +1,19 @@
 version: 2
 mergeable:
-  - when: pull_request.*, pull_request_review.*, pull_request_review_comment.*
+  - when: pull_request.*
     validate:
       - do: title
-        must_include:
-          regex: '.*'
+        no_empty:
+          enabled: true
           message: 'PR title must not be empty.'
       - do: description
         no_empty:
           enabled: true
           message: Description matter and should not be empty. Provide detail with **what** was changed, **why** it was changed, and **how** it was changed.
-    pass:
-      - do: merge
-        method: merge
+    fail:
+      - do: comment
+        payload:
+          body: >
+            The following problems were found with this issue:
+              - Title must not be empty
+              - The description must not be empty
